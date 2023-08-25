@@ -11,13 +11,12 @@ namespace EspacioCadeteria{
         public string? Observacion { get => observacion; set => observacion = value; }
         public string? Estado { get => estado; set => estado = value; }
 
-        public Pedido(int numero, string observacion, string nombreCliente, string direccion, int telefono, string referencia_direccion, string estado)
+        public Pedido(int numero, string observacion, string nombreCliente, string direccion, int telefono, string referencia_direccion)
         {
             cliente = new Cliente( nombreCliente,  direccion,  telefono,  referencia_direccion);
             Numero = numero;
             Observacion = observacion;
             Estado = "Pendiente";
         }
-       
     }
 }
