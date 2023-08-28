@@ -11,12 +11,20 @@ namespace EspacioCadeteria{
         public string? Observacion { get => observacion; set => observacion = value; }
         public string? Estado { get => estado; set => estado = value; }
 
-        public Pedido(int numero, string observacion, string nombreCliente, string direccion, int telefono, string referencia_direccion)
+        public Pedido(int numero, string observacion, string nombreCliente, string direccion, long telefono, string referencia_direccion)
         {
             cliente = new Cliente( nombreCliente,  direccion,  telefono,  referencia_direccion);
-            Numero = numero;
-            Observacion = observacion;
-            Estado = "Pendiente";
+            this.numero = numero;
+            this.observacion = observacion;
+            estado = "Pendiente";
+        }
+        public void VerDireccionCliente(){
+            Console.WriteLine(cliente.Direccion);
+        }
+        public void VerDatosCliente(){
+            Console.WriteLine(cliente.Nombre);
+            Console.WriteLine(cliente.Telefono);
+            Console.WriteLine(cliente.Referencia_direccion);
         }
     }
 }
