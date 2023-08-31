@@ -4,7 +4,7 @@ namespace EspacioCadeteria{
         private string? nombre;
         private string? direccion;
         private long telefono;
-        List<Pedido> listaPedidos;
+        List<Pedido> listaPedidos = new List<Pedido>();
 
         public int Id { get => id; set => id = value; }
         public string? Nombre { get => nombre; set => nombre = value; }
@@ -26,10 +26,7 @@ namespace EspacioCadeteria{
         }
 
         public void mostrarDatosCadete(){
-            Console.WriteLine($"ID: {id}");
-            Console.WriteLine($"Nombre: {nombre}");
-            Console.WriteLine($"Dirección: {direccion}");
-            Console.WriteLine($"Telefono: {telefono}");
+            Console.WriteLine($"ID: {id} - Nombre: {nombre} - Dirección: {direccion} - Telefono: {telefono}");
         }
 
         public int jornalACobrar(){

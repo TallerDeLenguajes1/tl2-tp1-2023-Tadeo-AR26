@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Xml;
 
 namespace EspacioCadeteria{
     public class Cadeteria{
@@ -23,7 +24,24 @@ namespace EspacioCadeteria{
             listaCadetes.Add(NuevoCadete);
         }
         
-        public void AgregarPedido(int id, int numero, string observacion, string nombreCliente, string direccion, long telefono, string referencia_direccion){
+        public void AgregarPedido(){
+            int id, numero;
+            string? observacion, nombreCliente, direccion, referencia_direccion;
+            long telefono;
+            Console.WriteLine("Ingrese el ID del cadete:");
+            bool successfullyParsed = int.TryParse(Console.ReadLine(), out id);
+            Console.WriteLine("Ingrese el numero de pedido");
+            successfullyParsed = int.TryParse(Console.ReadLine(), out numero);
+            Console.WriteLine("Ingrese la observación del pedido");
+            observacion = Console.ReadLine();
+            Console.WriteLine("Ingrese el nombre del cliente");
+            nombreCliente = Console.ReadLine();
+            Console.WriteLine("Ingrese la dirección del cliente");
+            direccion = Console.ReadLine();
+            Console.WriteLine("Ingrese el teléfono del cliente");
+            successfullyParsed = long.TryParse(Console.ReadLine(), out telefono);
+            Console.WriteLine("Ingrese una referencia para la dirección");
+            referencia_direccion = Console.ReadLine();
             listaCadetes[id].AgregarPedido(numero, observacion, nombreCliente, direccion, telefono, referencia_direccion);
         }
 
@@ -62,11 +80,28 @@ namespace EspacioCadeteria{
         }
 
         public void cargarCadetesCSV(string archivo){
+            List<Cadete> cadetes = new List<Cadete>();
             var cadetesCargados = File.ReadAllLines(archivo)
             .Skip(1).                           //Saltea el encabezado
             Select(line => line.Split(',')).
             Select(parts => new Cadete(int.Parse(parts[0]), parts[1], parts[2], long.Parse(parts[3])));
-            listaCadetes.AddRange(cadetesCargados);
+            cadetes.AddRange(cadetesCargados);
+            ListaCadetes = cadetes;
+            Console.WriteLine("Cadetes cargados correctamente");
+        }
+
+        public void mostrarDatosCadete(){
+            foreach(Cadete cadete in listaCadetes){
+                cadete.mostrarDatosCadete();
+            }
+        }
+
+        public void informe(){
+            int jornal = 0;
+            foreach(Cadete cadete in listaCadetes){
+                jornal = cadete.jornalACobrar();
+                Console.WriteLine($"Nombre: {cadete.Nombre} - Total de envíos {jornal/500} - Jornal a cobrar {jornal}");
+            }
         }
     }
 }
