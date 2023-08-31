@@ -31,5 +31,15 @@ namespace EspacioCadeteria{
             Console.WriteLine($"Dirección: {direccion}");
             Console.WriteLine($"Telefono: {telefono}");
         }
+
+        public int jornalACobrar(){
+            int jornal = 0;
+            foreach(Pedido pedido in ListaPedidos){
+                if(pedido.Estado == "Entregado"){
+                    jornal += 500;
+                }
+            }
+            return jornal;
+        }
     }
 }

@@ -1,3 +1,8 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+
 namespace EspacioCadeteria{
     public class Cadeteria{
         private string? nombre;
@@ -22,17 +27,46 @@ namespace EspacioCadeteria{
             listaCadetes[id].AgregarPedido(numero, observacion, nombreCliente, direccion, telefono, referencia_direccion);
         }
 
-        public void CambiarPedidoDeCadete(int numeroPedido, Cadete nuevoCadete){
-            foreach (Cadete cadete in listaCadetes){
-                Pedido pedidoEncontrado = cadete.ListaPedidos.Find(pedido => pedido.Numero == numeroPedido);
-                if (pedidoEncontrado != null){
-                    cadete.ListaPedidos.Remove(pedidoEncontrado);
-                    nuevoCadete.ListaPedidos.Add(pedidoEncontrado);
-                    Console.WriteLine($"El pedido {numeroPedido} se ha cambiado de cadete.");
-                    return;
+        public void CambiarPedidoDeCadete(int numeroPedido, int idNuevoCadete){
+            Cadete nuevoCadete = listaCadetes.Find(cadete => cadete.Id == idNuevoCadete);
+            if(nuevoCadete != null){
+                foreach (Cadete cadete in listaCadetes){
+                    Pedido pedidoEncontrado = cadete.ListaPedidos.Find(pedido => pedido.Numero == numeroPedido);
+                    if (pedidoEncontrado != null){
+                        cadete.ListaPedidos.Remove(pedidoEncontrado);
+                        nuevoCadete.ListaPedidos.Add(pedidoEncontrado);
+                        Console.WriteLine($"El pedido {numeroPedido} se ha cambiado de cadete.");
+                        return;
+                    }
                 }
+                Console.WriteLine($"No se encontró el pedido {numeroPedido}");
             }
-            Console.WriteLine($"No se encontró el pedido {numeroPedido}");
+            else{
+                Console.WriteLine($"No se encontró el cadete {idNuevoCadete}");
+            }
+        }
+
+        public void cambiarEstadoPedido(int numeroPedido){
+            foreach(Cadete cadete in listaCadetes){
+                Pedido pedidoEncontrado = cadete.ListaPedidos.Find(pedido => pedido.Numero == numeroPedido);
+                    if(pedidoEncontrado != null){
+                        if(pedidoEncontrado.Estado == "Pendiente"){
+                            pedidoEncontrado.Estado = "Entregado";
+                            Console.WriteLine("El pedido se marcó como entregado");
+                        }
+                        else{
+                            Console.WriteLine("Este pedido ya fue entregado");
+                        }
+                    }
+            }
+        }
+
+        public void cargarCadetesCSV(string archivo){
+            var cadetesCargados = File.ReadAllLines(archivo)
+            .Skip(1).                           //Saltea el encabezado
+            Select(line => line.Split(',')).
+            Select(parts => new Cadete(int.Parse(parts[0]), parts[1], parts[2], long.Parse(parts[3])));
+            listaCadetes.AddRange(cadetesCargados);
         }
     }
 }
