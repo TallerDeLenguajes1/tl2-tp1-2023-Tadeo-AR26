@@ -105,5 +105,15 @@ namespace EspacioCadeteria{
                 Console.WriteLine($"Nombre: {cadete.Nombre} - Total de envíos {jornal/500} - Jornal a cobrar {jornal}");
             }
         }
+
+        public void jornalACobrar(int idCadete){
+            listaCadetes.Find();
+        }
+
+        public void asignarCadeteAPedido(int idCadete, int idPedido){
+            Pedido pedidoEncontrado = listaPedidos.FirstOrDefault(pedido => pedido.Numero == idPedido);
+            Cadete cadeteEncontrado = listaCadetes.FirstOrDefault(cadete => cadete.Id == idCadete);
+            pedidoEncontrado.Cadete = cadeteEncontrado;
+        }
     }
 }
