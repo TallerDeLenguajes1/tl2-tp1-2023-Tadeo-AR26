@@ -9,10 +9,12 @@ namespace EspacioCadeteria{
         private string? nombre;
         private long telefono;
         private List<Cadete> listaCadetes;
+        private List<Pedido> listaPedidos = new List<Pedido>();
 
         public string? Nombre { get => nombre; set => nombre = value; }
         public long Telefono { get => telefono; set => telefono = value; }
         public List<Cadete> ListaCadetes { get => listaCadetes; set => listaCadetes = value; }
+        public List<Pedido> ListaPedidos { get => listaPedidos; set => listaPedidos = value; }
 
         public Cadeteria(string nombre, long telefono){
             this.nombre = nombre;
@@ -42,7 +44,9 @@ namespace EspacioCadeteria{
             successfullyParsed = long.TryParse(Console.ReadLine(), out telefono);
             Console.WriteLine("Ingrese una referencia para la dirección");
             referencia_direccion = Console.ReadLine();
-            listaCadetes[id].AgregarPedido(numero, observacion, nombreCliente, direccion, telefono, referencia_direccion);
+            Pedido NuevoPedido;
+            NuevoPedido = new Pedido(numero, observacion, nombreCliente, direccion, telefono, referencia_direccion);
+            listaPedidos.Add(NuevoPedido);
         }
 
         public void CambiarPedidoDeCadete(int numeroPedido, int idNuevoCadete){

@@ -6,10 +6,13 @@ namespace EspacioCadeteria{
 
         private string? estado;
 
+        private Cadete? cadete;
+
         public int Numero { get => numero; set => numero = value; }
         public Cliente Cliente { get => cliente; set => cliente = value; }
         public string? Observacion { get => observacion; set => observacion = value; }
         public string? Estado { get => estado; set => estado = value; }
+        public Cadete Cadete { get => cadete; set => cadete = value; }
 
         public Pedido(int numero, string observacion, string nombreCliente, string direccion, long telefono, string referencia_direccion)
         {
