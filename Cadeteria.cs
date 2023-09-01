@@ -30,10 +30,8 @@ namespace EspacioCadeteria{
             int id, numero;
             string? observacion, nombreCliente, direccion, referencia_direccion;
             long telefono;
-            Console.WriteLine("Ingrese el ID del cadete:");
-            bool successfullyParsed = int.TryParse(Console.ReadLine(), out id);
             Console.WriteLine("Ingrese el numero de pedido");
-            successfullyParsed = int.TryParse(Console.ReadLine(), out numero);
+            bool successfullyParsed = int.TryParse(Console.ReadLine(), out numero);
             Console.WriteLine("Ingrese la observación del pedido");
             observacion = Console.ReadLine();
             Console.WriteLine("Ingrese el nombre del cliente");
@@ -49,7 +47,7 @@ namespace EspacioCadeteria{
             listaPedidos.Add(NuevoPedido);
         }
 
-        public void CambiarPedidoDeCadete(int numeroPedido, int idNuevoCadete){
+        /*public void CambiarPedidoDeCadete(int numeroPedido, int idNuevoCadete){
             Cadete nuevoCadete = listaCadetes.Find(cadete => cadete.Id == idNuevoCadete);
             if(nuevoCadete != null){
                 foreach (Cadete cadete in listaCadetes){
@@ -66,7 +64,7 @@ namespace EspacioCadeteria{
             else{
                 Console.WriteLine($"No se encontró el cadete {idNuevoCadete}");
             }
-        }
+        } */
 
         public void cambiarEstadoPedido(int numeroPedido){  
             Pedido pedidoEncontrado = ListaPedidos.Find(pedido => pedido.Numero == numeroPedido);
@@ -98,21 +96,26 @@ namespace EspacioCadeteria{
             }
         }
 
-        public void informe(){
+        /* public void informe(){
             int jornal = 0;
             foreach(Cadete cadete in listaCadetes){
                 jornal = cadete.jornalACobrar();
                 Console.WriteLine($"Nombre: {cadete.Nombre} - Total de envíos {jornal/500} - Jornal a cobrar {jornal}");
             }
-        }
+        } */
 
-        public void jornalACobrar(int idCadete){
-            listaCadetes.Find();
+        public int jornalACobrar(int idCadete){
+            int jornal = 0;
+            int montoPorPedido = 500;
+            jornal = listaPedidos
+            .Where(pedido => pedido.Cadete != null && pedido.Cadete.Id == idCadete && pedido.Estado == "Entregado")
+            .Sum(pedido => montoPorPedido);
+            return jornal;
         }
 
         public void asignarCadeteAPedido(int idCadete, int idPedido){
-            Pedido pedidoEncontrado = listaPedidos.FirstOrDefault(pedido => pedido.Numero == idPedido);
-            Cadete cadeteEncontrado = listaCadetes.FirstOrDefault(cadete => cadete.Id == idCadete);
+            Pedido pedidoEncontrado = listaPedidos.Find(pedido => pedido.Numero == idPedido);
+            Cadete cadeteEncontrado = listaCadetes.Find(cadete => cadete.Id == idCadete);
             pedidoEncontrado.Cadete = cadeteEncontrado;
         }
     }

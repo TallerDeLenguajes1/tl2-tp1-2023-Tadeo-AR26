@@ -19,17 +19,17 @@ namespace EspacioCadeteria{
             this.telefono = telefono;
         }
 
-        public void AgregarPedido(int numero, string observacion, string nombreCliente, string direccion, long telefono, string referencia_direccion){
+        /*public void AgregarPedido(int numero, string observacion, string nombreCliente, string direccion, long telefono, string referencia_direccion){
             Pedido NuevoPedido;
             NuevoPedido = new Pedido(numero, observacion, nombreCliente, direccion, telefono, referencia_direccion);
             listaPedidos.Add(NuevoPedido);
-        }
+        }*/
 
         public void mostrarDatosCadete(){
             Console.WriteLine($"ID: {id} - Nombre: {nombre} - Dirección: {direccion} - Telefono: {telefono}");
         }
 
-        public int jornalACobrar(){
+        /* public int jornalACobrar(){
             int jornal = 0;
             foreach(Pedido pedido in ListaPedidos){
                 if(pedido.Estado == "Entregado"){
@@ -37,6 +37,6 @@ namespace EspacioCadeteria{
                 }
             }
             return jornal;
-        }
+        } */
     }
 }

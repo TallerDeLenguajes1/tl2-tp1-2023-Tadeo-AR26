@@ -30,7 +30,7 @@ internal class Program{
                     Console.WriteLine("Ingrese el id del cadete");
                     int id = 0;
                     successfullyParsed = int.TryParse(Console.ReadLine(), out id);
-                    cadeteria.CambiarPedidoDeCadete(numero, id);
+                    cadeteria.asignarCadeteAPedido(id, numero);
                     break;
                 case 3:
                     Console.WriteLine("Ingrese el numero de pedido");
@@ -39,7 +39,10 @@ internal class Program{
                     cadeteria.cambiarEstadoPedido(numero);
                     break;
                 case 4:
-                    cadeteria.informe();
+                    Console.WriteLine("Ingrese el ID del cadete que desea ver su jornal");
+                    successfullyParsed = int.TryParse(Console.ReadLine(), out id);
+                    int jornal = cadeteria.jornalACobrar(id);
+                    Console.WriteLine($"El jornal a cobrar es {jornal}");
                     break;
             }
         }
