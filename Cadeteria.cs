@@ -118,5 +118,11 @@ namespace EspacioCadeteria{
             Cadete cadeteEncontrado = listaCadetes.Find(cadete => cadete.Id == idCadete);
             pedidoEncontrado.Cadete = cadeteEncontrado;
         }
+
+        public void reasignarCadete(int idCadete, int numero){
+            Pedido pedidoEncontrado = listaPedidos.Find(pedido => pedido.Numero == numero);
+            Cadete cadeteEncontrado = listaCadetes.Find(cadete => cadete.Id == idCadete);
+            pedidoEncontrado.Cadete = cadeteEncontrado;
+        }
     }
 }

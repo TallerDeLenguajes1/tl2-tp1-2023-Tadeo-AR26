@@ -13,7 +13,7 @@ internal class Program{
         int opcion = 0;
         while(opcion != 5){
             Console.WriteLine("1- Agregar un pedido");
-            Console.WriteLine("2- Reasignar un pedido a un cadete");
+            Console.WriteLine("2- Asignar un cadete a un pedido");
             Console.WriteLine("3- Cambiar el estado de un pedido");
             Console.WriteLine("4- Mostrar el informe");
             Console.WriteLine("5- Salir");
