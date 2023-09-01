@@ -68,17 +68,15 @@ namespace EspacioCadeteria{
             }
         }
 
-        public void cambiarEstadoPedido(int numeroPedido){
-            foreach(Cadete cadete in listaCadetes){
-                Pedido pedidoEncontrado = cadete.ListaPedidos.Find(pedido => pedido.Numero == numeroPedido);
-                    if(pedidoEncontrado != null){
-                        if(pedidoEncontrado.Estado == "Pendiente"){
-                            pedidoEncontrado.Estado = "Entregado";
-                            Console.WriteLine("El pedido se marcó como entregado");
-                        }
-                        else{
-                            Console.WriteLine("Este pedido ya fue entregado");
-                        }
+        public void cambiarEstadoPedido(int numeroPedido){  
+            Pedido pedidoEncontrado = ListaPedidos.Find(pedido => pedido.Numero == numeroPedido);
+                if(pedidoEncontrado != null){
+                    if(pedidoEncontrado.Estado == "Pendiente"){
+                        pedidoEncontrado.Estado = "Entregado";
+                        Console.WriteLine("El pedido se marcó como entregado");
+                    }
+                    else{
+                        Console.WriteLine("Este pedido ya fue entregado");
                     }
             }
         }
