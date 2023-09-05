@@ -7,8 +7,8 @@ internal class Program{
         Cadeteria cadeteria;
         long telefono = 5491123900033;
         cadeteria = new Cadeteria("PedidosYa", telefono);
-        string archivo = "Cadetes.csv";
-        cadeteria.cargarCadetesCSV(archivo);
+        cadeteria.cargarCadetes();
+        cadeteria.mostrarDatosCadete();
 
         int opcion = 0;
         while(opcion != 6){

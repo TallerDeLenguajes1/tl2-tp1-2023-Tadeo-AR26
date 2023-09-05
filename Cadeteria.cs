@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml;
+using Espacio.Cadeteria;
 
 namespace EspacioCadeteria{
     public class Cadeteria{
@@ -79,15 +80,23 @@ namespace EspacioCadeteria{
             }
         }
 
-        public void cargarCadetesCSV(string archivo){
-            List<Cadete> cadetes = new List<Cadete>();
-            var cadetesCargados = File.ReadAllLines(archivo)
-            .Skip(1).                           //Saltea el encabezado
-            Select(line => line.Split(',')).
-            Select(parts => new Cadete(int.Parse(parts[0]), parts[1], parts[2], long.Parse(parts[3])));
-            cadetes.AddRange(cadetesCargados);
-            ListaCadetes = cadetes;
-            Console.WriteLine("Cadetes cargados correctamente");
+        public void cargarCadetes(){
+            int opcion;
+            Console.WriteLine("Cargar datos desde:");
+            Console.WriteLine("1- CSV");
+            Console.WriteLine("2- JSON");
+            bool successfullyParsed = int.TryParse(Console.ReadLine(), out opcion);
+            AccesoADatos acceso = new AccesoADatos();
+            string archivo = "Cadetes";
+            switch(opcion){
+                case 1:
+                    acceso = new AccesoCSV();
+                    break;
+                case 2:
+                    acceso = new AccesoJSON();
+                    break;
+            }
+            listaCadetes = acceso.cargarCadetes(archivo);
         }
 
         public void mostrarDatosCadete(){
