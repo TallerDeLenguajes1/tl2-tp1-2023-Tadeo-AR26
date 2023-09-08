@@ -1,13 +1,14 @@
+﻿namespace UtilityLibraries;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml;
-using Espacio.Cadeteria;
+using EspacioCadeteria;
 
-namespace EspacioCadeteria{
-    public class Cadeteria{
-        private string? nombre;
+public class libreriaCadeteria
+{
+    private string? nombre;
         private long telefono;
         private List<Cadete> listaCadetes;
         private List<Pedido> listaPedidos = new List<Pedido>();
@@ -17,7 +18,7 @@ namespace EspacioCadeteria{
         public List<Cadete> ListaCadetes { get => listaCadetes; set => listaCadetes = value; }
         public List<Pedido> ListaPedidos { get => listaPedidos; set => listaPedidos = value; }
 
-        public Cadeteria(string nombre, long telefono){
+        public libreriaCadeteria(string nombre, long telefono){
             this.nombre = nombre;
             this.telefono = telefono;
         }
@@ -112,5 +113,4 @@ namespace EspacioCadeteria{
             Cadete cadeteEncontrado = listaCadetes.Find(cadete => cadete.Id == idCadete);
             pedidoEncontrado.Cadete = cadeteEncontrado;
         }
-    }
 }

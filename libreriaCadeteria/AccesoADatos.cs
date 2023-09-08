@@ -6,7 +6,7 @@ using System.Xml;
 using System.Text.Json;
 using EspacioCadeteria;
 
-namespace Espacio.Cadeteria{
+namespace EspacioCadeteria{
     public class AccesoADatos{
         private List<Cadete> listaCadetes;
         public List<Cadete> ListaCadetes { get => listaCadetes; set => listaCadetes = value; }
