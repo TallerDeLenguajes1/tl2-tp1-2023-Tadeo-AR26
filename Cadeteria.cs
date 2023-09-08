@@ -27,22 +27,7 @@ namespace EspacioCadeteria{
             listaCadetes.Add(NuevoCadete);
         }
         
-        public void AgregarPedido(){
-            int id, numero;
-            string? observacion, nombreCliente, direccion, referencia_direccion;
-            long telefono;
-            Console.WriteLine("Ingrese el numero de pedido");
-            bool successfullyParsed = int.TryParse(Console.ReadLine(), out numero);
-            Console.WriteLine("Ingrese la observación del pedido");
-            observacion = Console.ReadLine();
-            Console.WriteLine("Ingrese el nombre del cliente");
-            nombreCliente = Console.ReadLine();
-            Console.WriteLine("Ingrese la dirección del cliente");
-            direccion = Console.ReadLine();
-            Console.WriteLine("Ingrese el teléfono del cliente");
-            successfullyParsed = long.TryParse(Console.ReadLine(), out telefono);
-            Console.WriteLine("Ingrese una referencia para la dirección");
-            referencia_direccion = Console.ReadLine();
+        public void AgregarPedido(int numero, string observacion, string nombreCliente, string direccion, long telefono, string referencia_direccion){
             Pedido NuevoPedido;
             NuevoPedido = new Pedido(numero, observacion, nombreCliente, direccion, telefono, referencia_direccion);
             listaPedidos.Add(NuevoPedido);
@@ -72,20 +57,14 @@ namespace EspacioCadeteria{
                 if(pedidoEncontrado != null){
                     if(pedidoEncontrado.Estado == "Pendiente"){
                         pedidoEncontrado.Estado = "Entregado";
-                        Console.WriteLine("El pedido se marcó como entregado");
                     }
                     else{
-                        Console.WriteLine("Este pedido ya fue entregado");
                     }
             }
         }
 
-        public void cargarCadetes(){
-            int opcion;
-            Console.WriteLine("Cargar datos desde:");
-            Console.WriteLine("1- CSV");
-            Console.WriteLine("2- JSON");
-            bool successfullyParsed = int.TryParse(Console.ReadLine(), out opcion);
+        public void cargarCadetes(int opcion){
+            // 1 cargar desde CSV - 2 cargar desde JSON
             AccesoADatos acceso = new AccesoADatos();
             string archivo = "Cadetes";
             switch(opcion){
